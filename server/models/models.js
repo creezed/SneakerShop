@@ -7,7 +7,8 @@ const User = sequelize.define('user', {
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
     role: {type: DataTypes.STRING, defaultValue: "USER"},
-    // number: {type: DataTypes.INTEGER, unique: true, defaultValue: null}
+    number: {type: DataTypes.INTEGER, unique: true, defaultValue: null},
+    gender: {type: DataTypes.ENUM('men', 'women')}
 })
 
 const Basket = sequelize.define('basket', {
@@ -77,10 +78,6 @@ const Images = sequelize.define('Images', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
 
-const ImagesProduct = sequelize.define('product_images', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
-
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -105,13 +102,13 @@ BasketProduct.belongsTo(Product)
 Product.hasMany(FavouritesProduct)
 FavouritesProduct.belongsTo(Product)
 
+Product.hasMany(Images, {as: 'images'})
+Images.belongsTo(Product)
+
 
 // belongs to many
 Categories.belongsToMany(Product, { through: CategoriesProduct })
 Product.belongsToMany(Categories, { as: "categories", through: CategoriesProduct })
-
-Images.belongsToMany(Product, { through: ImagesProduct })
-Product.belongsToMany(Images, { as: "images", through: ImagesProduct })
 
 Size.belongsToMany(Product, { through: SizeProduct })
 Product.belongsToMany(Size, { as: "size", through: SizeProduct })
@@ -127,7 +124,6 @@ module.exports = {
     Size,
     SizeProduct,
     Images,
-    ImagesProduct,
     Categories,
     CategoriesProduct,
     Brand

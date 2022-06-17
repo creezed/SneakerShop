@@ -233,9 +233,7 @@ class ProductController {
                     base: `${img}`
                 })
 
-                const images = await Images.create({name: imgPath})
-                const ImageId = images.id
-                await ImagesProduct.create({ImageId: ImageId, productId: productId})
+                await Images.create({name: imgPath, productId})
             }
 
             return  res.json(product)

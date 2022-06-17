@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { colors, fontSize, fontWeight, transition, boxShadow } from "../styles/themeAction";
+import { colors, fontSize, fontWeight, transition, boxShadow } from "../../styles/themeAction";
 
 
 // If the product is in the favorites or in the user's cart, then you need a cross to delete it
@@ -116,7 +116,7 @@ const BasketIconPlus = styled.path`
 //
 
 const Card = styled(Link)`
-  width: 280px;
+  width: 286px;
   display: block;
   position: relative;
   overflow: hidden;

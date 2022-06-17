@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 const RadioWrapper = styled.label`
   position: relative;
-  z-index: ${({ theme }) => theme.zIndex.ui};
   width: 18px;
   height: 18px;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.gray800};
   border-radius: 50%;
   white-space: nowrap;
   cursor: pointer;
+  
+  border: 1px solid ${({ theme }) => theme.colors.gray800};
+  z-index: ${({ theme }) => theme.zIndex.ui};
   transition: .1s ${({ theme }) => theme.transition.easeOut};
   :before {
     position: absolute;
@@ -53,8 +54,7 @@ const RadioLabel = styled.label`
   }
 `
 
-export const Radio = ({onChange, name, label, fz, checked, id}) => {
-
+export const Radio = ({ onChange, name, label, fz, checked, id }) => {
     return(
         <RadioLabel>
             <RadioInput id={id} name={name} type='radio' onChange={onChange}/>

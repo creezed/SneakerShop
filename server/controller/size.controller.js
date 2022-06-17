@@ -3,9 +3,20 @@ const ApiError = require('../error/ApiError')
 
 class SizeController {
     async getAll(req,res) {
-        const size = await Size.findAll({
-            attributes: {exclude: ["createdAt", "updatedAt"]}
-        })
+        const { gender } = req.query
+        let size;
+        if (!gender) {
+            size = await Size.findAll({
+                attributes: {exclude: ["createdAt", "updatedAt"]}
+            })
+        }
+        if (gender) {
+            size = await Size.findAll({
+                where: {gender},
+                attributes: {exclude: ["createdAt", "updatedAt"]}
+            })
+        }
+
         res.json(size)
     }
 

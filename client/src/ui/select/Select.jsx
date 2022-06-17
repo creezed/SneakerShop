@@ -1,18 +1,20 @@
-import styled, {css} from "styled-components";
-import {useState} from "react";
+import styled, { css } from "styled-components";
+import { useState } from "react";
+import { colors, zIndex, transition } from "../../styles/themeAction";
 
 const CustomSelect = styled.div`
   position: relative;
   width: 100%;
-  z-index: ${({ theme }) => theme.zIndex.select};
   background-color: #fff;
   height: 50px;
   border-radius: 15px;
   cursor: pointer;
-  border: 1px solid ${({ isActive, theme }) => isActive ? theme.colors.accentColor : theme.colors.border};
   padding: 16px;
   user-select: none;
-  transition: .1s ${({ theme }) => theme.transition.easeOut};
+  
+  border: 1px solid ${({ isActive }) => isActive ? colors.accentColor : colors.border};
+  z-index: ${zIndex.select};
+  transition: .1s ${transition.easeOut};
   ${({ boxShadow }) => boxShadow &&
     css`
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
@@ -30,7 +32,7 @@ const SelectContent = styled.ul`
   border-radius: 5px 5px 15px 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.04);
   opacity: 0;
-  transition: 1s ${({ theme }) => theme.transition.easeOut};
+  transition: 1s ${transition.easeOut};
   ${({ isActive }) => isActive && 
       css`
         opacity: 1;
@@ -49,7 +51,7 @@ const SelectItem = styled.li`
     border-radius: 0 0 15px 15px;
   }
   :hover {
-    background-color: ${({ theme }) => theme.colors.gray100};
+    background-color: ${colors.gray100};
   }
   ${({ disabled }) => disabled && 
     css`
@@ -66,7 +68,7 @@ const SelectText = styled.div`
 `
 
 const SelectSvg = styled.svg`
-  transition: .3s ${({ theme }) => theme.transition.easeOut};
+  transition: .3s ${ transition.easeOut };
   transform: rotate(180deg);
   ${({ isActive }) => isActive &&
           css`
@@ -75,8 +77,7 @@ const SelectSvg = styled.svg`
   }
 `
 
-export const Select = (props) => {
-    const { setSelectValue, options, defaultValue, boxShadow } = props
+export const Select = ({ setSelectValue, options, defaultValue = 'Сортировать по', boxShadow }) => {
     const [ isActive, setIsActive ] = useState(false)
     const [ selectText, setSelectText ] = useState(defaultValue)
 

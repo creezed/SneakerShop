@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { colors, zIndex } from "../styles/themeAction";
-import { skeleton } from '../ui/animations/skeleton'
+import { colors, zIndex } from "../../styles/themeAction";
+import { skeleton } from '../../ui/animations/skeleton'
 
 const Card = styled.div`
   position: relative;

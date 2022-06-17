@@ -1,3 +1,5 @@
+import { css } from "styled-components";
+
 export const baseTheme = {
     colors: {
         white: `#fff`,
@@ -17,9 +19,11 @@ export const baseTheme = {
     },
 
     zIndex: {
+        header: 70,
         ui: 10,
         select: 50,
         modal: 100,
+        basket: 80,
     },
 
     font: {
@@ -60,11 +64,19 @@ export const baseTheme = {
         modal: { width: '800px' }
     },
 
+    boxShadow: {
+        LargerShadow: '0 14px 30px rgba(0, 0, 0, 0.05);'
+    },
+
     transition: {
         easeOut: 'ease-out'
     },
 
-    boxShadow: {
-        LargerShadow: '0 14px 30px rgba(0, 0, 0, 0.05);'
+    getTransition: (duration, property, animation ) => {
+        return  css`
+          transition-duration: ${duration}s;
+          transition-property: ${[property].join(', ')};
+          transition-timing-function: ${animation};
+        `
     }
 }

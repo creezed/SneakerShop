@@ -1,11 +1,19 @@
-import { Outlet } from 'react-router-dom'
+import {Outlet, useLocation} from 'react-router-dom'
 
-import Header from "../components/Header";
+import Header from "../components/header/Header";
+import {Container} from "../styles/layout/Container";
 
 const Layout = () => {
+    const location = useLocation()
+    const pathWithoutHeader = ['/auth/login', '/auth/registration']
+
     return(
         <>
-            <Header />
+            {!pathWithoutHeader.includes(location.pathname) &&
+                <Container>
+                    <Header />
+                </Container>
+            }
             <main>
                 <Outlet />
             </main>
